@@ -8,10 +8,12 @@ def myfun() {
                     def authorization = Jenkins.getInstance().getAuthorizationStrategy()
                     def grantedRoles = authorization.getGrantedRoles(RoleBasedAuthorizationStrategy.GLOBAL)
 
-                    for (Role grantedRole : grantedRoles.entrySet()) {
-                        if (grantedRole.getValue().contains(user.getId())) {
+                    for (def grantedRole : grantedRoles.entrySet()) {
+                      echo "${grantedRole.getClass()}"
+                      
+                        /*if (grantedRole.getValue().contains(user.getId())) {
                             echo grantedRole.getKey().getName()
-                        }
+                        }*/
                     }
 }
 
