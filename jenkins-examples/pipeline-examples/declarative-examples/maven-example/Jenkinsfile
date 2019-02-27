@@ -1,12 +1,11 @@
 import jenkins.model.Jenkins
 import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy
 
+def userId
+
 @NonCPS
 def myfun() {
-                    def userId
-                    wrap([$class: 'BuildUser']) {
-                      userId = "${BUILD_USER_ID}"
-                    }
+                    
                         
                     def authorization = Jenkins.getInstance().getAuthorizationStrategy()
                     def grantedRoles = authorization.getGrantedRoles(RoleBasedAuthorizationStrategy.GLOBAL)
@@ -27,6 +26,11 @@ pipeline {
         stage ('Clone') {
             steps {
                 //git branch: 'master', url: "https://github.com/jfrog/project-examples.git"
+                
+                wrap([$class: 'BuildUser']) {
+                      userId = BUILD_USER_ID
+                }
+              
                 script {
                   echo "antes"
                   myfun()
