@@ -3,10 +3,10 @@ import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrate
 
 @NonCPS
 def myfun() {
-  def userId
-  wrap([$class: 'BuildUser']) {
-    userId = env.BUILD_USER_ID
-  }
+                    def userId
+                    /*wrap([$class: 'BuildUser']) {
+                      userId = env.BUILD_USER_ID
+                    }*/
                         
                     def authorization = Jenkins.getInstance().getAuthorizationStrategy()
                     def grantedRoles = authorization.getGrantedRoles(RoleBasedAuthorizationStrategy.GLOBAL)
