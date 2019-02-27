@@ -4,10 +4,21 @@ pipeline {
         stage ('Clone') {
             steps {
                 git branch: 'master', url: "https://github.com/jfrog/project-examples.git"
+                script {
+                    def userId = env.BUILD_USER_ID
+                    def authorization = Jenkins.getInstance().getAuthorizationStrategy()
+                    def grantedRoles = authorization.getGrantedRoles(RoleBasedAuthorizationStrategy.GLOBAL)
+
+                    for (Role grantedRole : grantedRoles.entrySet()) {
+                        if (grantedRole.getValue().contains(user.getId())) {
+                            echo grantedRole.getKey().getName()
+                        }
+                    }
+                }
             }
         }
 
-        stage ('Artifactory configuration') {
+/*        stage ('Artifactory configuration') {
             steps {
                 rtServer (
                     id: "ARTIFACTORY_SERVER",
@@ -49,6 +60,6 @@ pipeline {
                     serverId: "ARTIFACTORY_SERVER"
                 )
             }
-        }
+        }*/
     }
 }
