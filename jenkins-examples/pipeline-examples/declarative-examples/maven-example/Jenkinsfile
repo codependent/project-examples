@@ -1,10 +1,10 @@
 import jenkins.model.Jenkins
 import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy
 
-def userId
+
 
 @NonCPS
-def myfun() {
+def myfun(userId) {
                     
                         
                     def authorization = Jenkins.getInstance().getAuthorizationStrategy()
@@ -29,14 +29,9 @@ pipeline {
                 
                 wrap([$class: 'BuildUser']) {
                   script {
-                      userId = BUILD_USER_ID
+                      def userId = BUILD_USER_ID
+                      myfun(userId)
                   }
-                }
-              
-                script {
-                  echo "antes"
-                  myfun()
-                  echo "despues"
                 }
             }
         }
