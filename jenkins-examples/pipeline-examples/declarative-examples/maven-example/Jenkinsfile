@@ -15,9 +15,22 @@ def myfun(userId) {
                       //echo "grantedRole ${grantedRole.getValue()}"
                       
                       if (grantedRole.getValue().contains(userId)) {
-                            echo grantedRole.getKey().getName()
+                        echo "GLOBAL ${grantedRole.getKey().getName()}"
                       }
                     }
+
+                    grantedRoles = authorization.getGrantedRoles(RoleBasedAuthorizationStrategy.PROJECT)
+                    //echo "userId $userId"
+
+                    for (def grantedRole : grantedRoles.entrySet()) {
+                      //echo "grantedRole ${grantedRole.getValue()}"
+                      
+                      if (grantedRole.getValue().contains(userId)) {
+                        echo "PROJECT ${grantedRole.getKey().getName()}"
+                      }
+                    }
+
+
 }
 
 pipeline {
