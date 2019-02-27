@@ -2,14 +2,9 @@ import jenkins.model.Jenkins
 import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy
 import com.michelin.cio.hudson.plugins.rolestrategy.Role
 
-pipeline {
-    agent any
-    stages {
-        stage ('Clone') {
-            steps {
-                git branch: 'master', url: "https://github.com/jfrog/project-examples.git"
-                script {
-                    def userId = env.BUILD_USER_ID
+@NonCPS
+funciont myfun() {
+                        def userId = env.BUILD_USER_ID
                     def authorization = Jenkins.getInstance().getAuthorizationStrategy()
                     def grantedRoles = authorization.getGrantedRoles(RoleBasedAuthorizationStrategy.GLOBAL)
 
@@ -18,6 +13,16 @@ pipeline {
                             echo grantedRole.getKey().getName()
                         }
                     }
+}
+
+pipeline {
+    agent any
+    stages {
+        stage ('Clone') {
+            steps {
+                git branch: 'master', url: "https://github.com/jfrog/project-examples.git"
+                script {
+                  myfun()
                 }
             }
         }
