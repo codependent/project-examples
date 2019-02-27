@@ -9,7 +9,10 @@ def myfun() {
                     def grantedRoles = authorization.getGrantedRoles(RoleBasedAuthorizationStrategy.GLOBAL)
 
                     for (def grantedRole : grantedRoles.entrySet()) {
-                      echo "${grantedRole.getValue().getClass()}"
+                      //echo "${grantedRole.getValue().getClass()}"
+                      for (def element : grantedRole.getValue()) {
+                        echo "${element.getClass()}"
+                      }
                       
                         /*if (grantedRole.getValue().contains(user.getId())) {
                             echo grantedRole.getKey().getName()
