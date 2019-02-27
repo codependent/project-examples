@@ -1,6 +1,5 @@
 import jenkins.model.Jenkins
 import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy
-import com.michelin.cio.hudson.plugins.rolestrategy.Role
 
 @NonCPS
 def myfun() {
@@ -9,14 +8,9 @@ def myfun() {
                     def grantedRoles = authorization.getGrantedRoles(RoleBasedAuthorizationStrategy.GLOBAL)
 
                     for (def grantedRole : grantedRoles.entrySet()) {
-                      //echo "${grantedRole.getValue().getClass()}"
-                      for (def element : grantedRole.getValue()) {
-                        echo "${element.getClass()}"
-                      }
-                      
-                        /*if (grantedRole.getValue().contains(user.getId())) {
+                      if (grantedRole.getValue().contains(user.getId())) {
                             echo grantedRole.getKey().getName()
-                        }*/
+                      }
                     }
 }
 
