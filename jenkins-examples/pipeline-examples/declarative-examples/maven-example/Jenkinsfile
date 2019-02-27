@@ -5,7 +5,7 @@ import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrate
 def myfun() {
                     def userId
                     wrap([$class: 'BuildUser']) {
-                      userId = BUILD_USER_ID
+                      userId = "${BUILD_USER_ID}"
                     }
                         
                     def authorization = Jenkins.getInstance().getAuthorizationStrategy()
