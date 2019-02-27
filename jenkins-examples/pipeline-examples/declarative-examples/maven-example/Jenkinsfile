@@ -26,9 +26,11 @@ pipeline {
     stages {
         stage ('Clone') {
             steps {
-                git branch: 'master', url: "https://github.com/jfrog/project-examples.git"
+                //git branch: 'master', url: "https://github.com/jfrog/project-examples.git"
                 script {
+                  echo "antes"
                   myfun()
+                  echo "despues"
                 }
             }
         }
